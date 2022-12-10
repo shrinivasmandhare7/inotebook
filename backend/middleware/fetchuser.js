@@ -1,14 +1,14 @@
 var jwt = require('jsonwebtoken');
-const JWT_SECRET = 'mostsecuretocken';
+const JWT_SECRET = 'mostsecuretoken';
 
 const fetchuser = (req, res, next) => {
-    //Get the User from jwt tocken and  add id to req object
-    const tocken = req.header('auth-tocken')
-    if (!tocken) {
+    //Get the User from jwt token and  add id to req object
+    const token = req.header('auth-token')
+    if (!token) {
         res.status(401).send({ error: "Please authenticate using a valid token." });
     }
     try {
-        const data = jwt.verify(tocken, JWT_SECRET)
+        const data = jwt.verify(token, JWT_SECRET)
         req.user = data.user;
         next();
     } catch (error) {

@@ -18,7 +18,7 @@ router.get('/fetchallnotes', fetchuser,
     });
 
 
-//Route2:Add a new Note using: POST "/api/notes/addnote".
+//Route 2: Add a new Note using: POST "/api/notes/addnote".
 //Login Required
 router.post('/addnote', fetchuser, [
     body('title', 'Enter a Valid title').isLength({ min: 5 }),
@@ -43,12 +43,12 @@ router.post('/addnote', fetchuser, [
         }
     });
 
-//Route3:Update a Note using: PUT "/api/notes/updatenote".
+//Route 3: Update a Note using: PUT "/api/notes/updatenote".
 //Login Required
 router.put('/updatenote/:id', fetchuser,
     async (req, res) => {
+        const { title, description, tag } = req.body;
         try {
-            const { title, description, tag } = req.body;
             //create a new Note Object
             const newNote = {};
             if (title) { newNote.title = title };
@@ -71,7 +71,7 @@ router.put('/updatenote/:id', fetchuser,
         }
     }
 )
-//Route4:Delete an existing Note using: DELETE "/api/notes/deletenote".
+//Route 4: Delete an existing Note using: DELETE "/api/notes/deletenote".
 //Login Required
 router.delete('/deletenote/:id', fetchuser,
     async (req, res) => {

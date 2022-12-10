@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user');
+const User = require('../models/User');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 var fetchuser = require('../middleware/fetchuser');
-const JWT_SECRET = 'mostsecuretocken';
+const JWT_SECRET = 'mostsecuretoken';
 
 
 //Route1:create a user using :POST "/api/auth/createuser".
@@ -29,6 +29,7 @@ router.post('/createuser', [
             }
             const salt = await bcrypt.genSalt(10);
             const secPass = await bcrypt.hash(req.body.password, salt);
+
             //create a new user
             user = await User.create({
                 name: req.body.name,
@@ -40,14 +41,15 @@ router.post('/createuser', [
                     id: user.id
                 }
             }
-            const authTocken = jwt.sign(payload, JWT_SECRET);
+            const authToken = jwt.sign(payload, JWT_SECRET);
             // res.json(user)
-            res.json({ authTocken })
+            res.json({ authToken })
         } catch (error) {
             console.error(error.message);
             res.status(500).send("Internal Server Error")
         }
     });
+
 //Route2:Authenticate a user using :POST "/api/auth/login".
 //No login required
 router.post('/login', [
@@ -75,8 +77,8 @@ router.post('/login', [
                     id: user.id,
                 }
             }
-            const authTocken = jwt.sign(payload, JWT_SECRET);
-            res.json({ authTocken })
+            const authToken = jwt.sign(payload, JWT_SECRET);
+            res.json({ authToken })
 
         } catch (error) {
             console.error(error.message);
