@@ -26,7 +26,7 @@ const AddNote = () => {
                     <label htmlFor="description" className="form-label">Description</label>
                     <textarea className="form-control" id="description" name='description' rows="3" onChange={onChange}></textarea>
                 </div>
-                <button className='btn btn-primary' type='submit' onClick={handleOnClick}>Add</button>
+                <button className='btn btn-primary' type='submit' onClick={handleOnClick}>Add Note</button>
             </form >
         </div >
     )
