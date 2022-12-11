@@ -44,22 +44,22 @@ const Notes = () => {
                             <form action="">
                                 <div className="mb-3">
                                     <label htmlFor="etitle" className="form-label">Title</label>
-                                    <input type="text" className="form-control" id="etitle" name="etitle" value={note.etitle} placeholder="Add a title" onChange={onChange} />
+                                    <input type="text" className="form-control" id="etitle" name="etitle" value={note.etitle} minLength={5} required placeholder="Add a title" onChange={onChange} />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="edescription" className="form-label">Description</label>
-                                    <textarea className="form-control" id="edescription" name='edescription' value={note.edescription} rows="3" onChange={onChange}></textarea>
+                                    <textarea className="form-control" id="edescription" name='edescription' value={note.edescription} minLength={5} required rows="3" onChange={onChange}></textarea>
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="etag" className="form-label">Tag</label>
-                                    <input type="text" className="form-control" id="etag" name="etag" value={note.etag} placeholder="Add a tag" onChange={onChange} />
+                                    <input type="text" className="form-control" id="etag" name="etag" value={note.etag} minLength={5} required placeholder="Add a tag" onChange={onChange} />
                                 </div>
 
                             </form >
                         </div>
                         <div className="modal-footer">
                             <button ref={refClose} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button onClick={handleOnClick} type="button" className="btn btn-primary">Update Note</button>
+                            <button disabled={note.etitle.length < 5 || note.edescription.length < 5} onClick={handleOnClick} type="button" className="btn btn-primary">Update Note</button>
                         </div>
                     </div>
                 </div>
@@ -67,7 +67,7 @@ const Notes = () => {
             <div className="row my-3">
                 <h1>Your Notes</h1>
                 <div className="container mx-2">
-                    {notes.lenth === 0 && 'No notes to display'}
+                    {notes.length === 0 && 'No notes to display'}
                 </div>
                 {notes.map((note) => {
                     return <NoteItem key={note._id} updateNote={updateNote} note={note} />
