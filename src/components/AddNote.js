@@ -5,11 +5,12 @@ const AddNote = () => {
     const context = useContext(noteContext);
     const { addNote } = context;
 
-    const [note, setNote] = useState({ title: "", description: "", tag: "default" })
+    const [note, setNote] = useState({ title: "", description: "", tag: "" })
 
     const handleOnClick = (e) => {
         e.preventDefault();
         addNote(note.title, note.description, note.tag);
+        setNote({ title: "", description: "", tag: "" })
     }
     const onChange = (e) => {
         setNote({ ...note, [e.target.name]: e.target.value })
@@ -20,11 +21,15 @@ const AddNote = () => {
             <form action="">
                 <div className="mb-3">
                     <label htmlFor="title" className="form-label">Title</label>
-                    <input type="text" className="form-control" id="title" name="title" placeholder="Add a title" onChange={onChange} />
+                    <input type="text" className="form-control" id="title" name="title" value={note.title} placeholder="Add a title" onChange={onChange} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="description" className="form-label">Description</label>
-                    <textarea className="form-control" id="description" name='description' rows="3" onChange={onChange}></textarea>
+                    <textarea className="form-control" id="description" name='description' value={note.description} rows="3" onChange={onChange}></textarea>
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="tag" className="form-label">Tag</label>
+                    <input type="text" className="form-control" id="tag" name="tag" value={note.tag} placeholder="Add a tag" onChange={onChange} />
                 </div>
                 <button className='btn btn-primary' type='submit' onClick={handleOnClick}>Add Note</button>
             </form >
