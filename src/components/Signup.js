@@ -28,7 +28,7 @@ export const Signup = (props) => {
             Navigate("/");
             props.showAlert("Account Created Successfully", "success")
         } else {
-            props.showAlert("Invalid Details", "danger")
+            props.showAlert("Sorry user with this email already exists", "danger")
         }
 
     }
@@ -36,7 +36,8 @@ export const Signup = (props) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value })
     }
     return (<>
-        <div className='container'>
+        <div className='container mt-2'>
+            <h1>Create an Account</h1>
             <form onSubmit={handleOnSubmit}>
                 <div className="mb-3">
                     <label htmlFor="name" className="form-label">Name</label>

@@ -25,8 +25,8 @@ const Login = (props) => {
         if (json.success) {
             //Save the auth-token and rediect
             localStorage.setItem('token', json.authToken);
-            Navigate("/");
             props.showAlert("Logged in successfully", "success")
+            Navigate("/");
         } else {
             props.showAlert("Invalid credentials", "danger")
         }
@@ -35,7 +35,7 @@ const Login = (props) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value })
     }
     return (
-        <>
+        <div className='container mt-2'>
             <h1>Login</h1>
             <form onSubmit={handleOnSubmit}>
                 <div className="mb-3">
@@ -49,7 +49,7 @@ const Login = (props) => {
                 </div>
                 <button type="submit" className="btn btn-primary" >Submit</button>
             </form>
-        </>
+        </div>
 
     )
 }
