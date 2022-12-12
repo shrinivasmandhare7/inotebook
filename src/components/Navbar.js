@@ -2,10 +2,11 @@ import React, { useEffect } from 'react'
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 
-const Navbar = () => {
+const Navbar = (props) => {
     let Navigate = useNavigate();
     const HandleLogout = () => {
         localStorage.removeItem('token');
+        props.showAlert("Logged Out successfully", "success")
         Navigate('/Login');
     }
     let location = useLocation();
